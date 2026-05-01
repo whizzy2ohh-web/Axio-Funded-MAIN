@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AXIO FUNDED design system. All colors HSL. */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+
+    /* Gold primary */
+    --primary: 44 56% 54%;            /* #C9A84C muted gold */
+    --primary-foreground: 0 0% 4%;
+    --primary-glow: 51 100% 50%;      /* #FFD700 highlight gold */
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 4%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 44 56% 54%;
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 70% 40%;
+    --warning: 38 92% 50%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 44 56% 54%;
+
+    --radius: 0.75rem;
+
+    /* Dark surface tokens used inside dark sections on light pages */
+    --surface-dark: 0 0% 4%;
+    --surface-dark-foreground: 0 0% 98%;
+    --surface-dark-muted: 0 0% 12%;
+    --surface-dark-border: 44 30% 30%;
+
+    --gold: 44 56% 54%;
+    --gold-bright: 51 100% 50%;
+    --gold-soft: 44 56% 70%;
+
+    --gradient-gold: linear-gradient(135deg, hsl(44 56% 54%), hsl(51 100% 50%));
+    --gradient-gold-soft: linear-gradient(135deg, hsl(44 56% 60% / 0.2), hsl(51 100% 50% / 0.1));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 6%), hsl(0 0% 2%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(44 56% 30% / 0.35), transparent 60%), linear-gradient(180deg, hsl(0 0% 4%), hsl(0 0% 0%));
+
+    --shadow-gold: 0 10px 40px -10px hsl(44 56% 54% / 0.4);
+    --shadow-gold-strong: 0 20px 60px -15px hsl(51 100% 50% / 0.5);
+    --shadow-card: 0 8px 30px -12px hsl(0 0% 0% / 0.15);
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 44 56% 54%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 44 56% 70%;
+    --sidebar-border: 0 0% 14%;
+    --sidebar-ring: 44 56% 54%;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 44 56% 54%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 44 56% 54%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 44 56% 54%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  body { @apply bg-background text-foreground antialiased; font-feature-settings: "ss01", "cv11"; }
+  h1, h2, h3, h4 { @apply font-bold tracking-tight; }
+}
+
+@layer utilities {
+  .text-gold { color: hsl(var(--gold)); }
+  .bg-gold { background-color: hsl(var(--gold)); }
+  .border-gold { border-color: hsl(var(--gold)); }
+  .bg-gradient-gold { background-image: var(--gradient-gold); }
+  .bg-gradient-dark { background-image: var(--gradient-dark); }
+  .bg-gradient-hero { background-image: var(--gradient-hero); }
+  .text-gradient-gold {
+    background-image: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+  .shadow-gold-strong { box-shadow: var(--shadow-gold-strong); }
+  .shadow-card-elegant { box-shadow: var(--shadow-card); }
+  .glass-gold {
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.04), hsl(0 0% 100% / 0.01));
+    border: 1px solid hsl(var(--gold) / 0.25);
+    backdrop-filter: blur(12px);
+  }
+  .surface-dark { background-color: hsl(var(--surface-dark)); color: hsl(var(--surface-dark-foreground)); }
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.6), transparent);
+  }
+  .hover-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .hover-lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-gold); }
+  .marquee {
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-fade-up {
+    animation: fadeUp 0.7s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
