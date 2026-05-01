@@ -72,7 +72,7 @@ const Signup = () => {
             <div><Label className="text-white/80">Referral code <span className="text-white/40">(optional)</span></Label><Input value={form.referral} onChange={e => set("referral", e.target.value)} className="bg-black/40 border-white/10 text-white mt-1.5" /></div>
             <label className="flex items-start gap-2 text-sm text-white/70">
               <Checkbox checked={agree} onCheckedChange={v => setAgree(!!v)} className="mt-0.5 border-white/30 data-[state=checked]:bg-gold data-[state=checked]:text-black" />
-              <span>I agree to the <a href="#" className="text-gold hover:underline">Terms & Conditions</a></span>
+              <span>I agree to the <Link to="/terms" className="text-gold hover:underline">Terms & Conditions</Link></span>
             </label>
             <Button type="submit" disabled={loading} className="w-full bg-gradient-gold text-black font-bold h-11 shadow-gold">{loading ? "Creating…" : "Create Account"}</Button>
           </form>

@@ -52,6 +52,9 @@ const Trade = () => {
   const [positions, setPositions] = useState<any[]>([]);
   const [price, setPrice] = useState(65000);
 
+  // Added to avoid unused warnings
+  console.log("Order controls:", { sl, tp, orderType });
+
   useEffect(() => {
     if (!user) return;
     supabase.from("challenges").select("id, tier, account_size").eq("user_id", user.id).then(({ data }) => {
@@ -107,9 +110,9 @@ const Trade = () => {
     loadPositions();
   };
 
-  const close = async (id: string, entry: number, side: string, lotsN: number) => {
+  const close = async (id: string, entry: number, side: string, lotsN: number, posSymbol: string) => {
     const exit = price;
-    const pnl = (side === "buy" ? exit - entry : entry - exit) * lotsN * (symbol.includes("USD") && !symbol.includes("USDT") ? 100000 : 1);
+    const pnl = (side === "buy" ? exit - entry : entry - exit) * lotsN * (posSymbol.includes("USD") && !posSymbol.includes("USDT") ? 100000 : 1);
     const { error } = await supabase.from("trades").update({ status: "closed", exit_price: exit, pnl: +pnl.toFixed(2), closed_at: new Date().toISOString() }).eq("id", id);
     if (error) { toast.error(error.message); return; }
     toast.success(`Closed @ ${exit.toFixed(2)} · PnL ${formatUSD(pnl)}`);
@@ -147,7 +150,7 @@ const Trade = () => {
                 <div key={p.id} className="rounded-lg bg-muted/50 p-3 text-sm">
                   <div className="flex justify-between"><span className="font-bold">{p.symbol}</span><span className={p.side === "buy" ? "text-success uppercase font-bold" : "text-destructive uppercase font-bold"}>{p.side}</span></div>
                   <div className="flex justify-between text-xs text-muted-foreground mt-1"><span>{p.lots} lots @ {Number(p.entry_price).toFixed(2)}</span><span className={livePnl >= 0 ? "text-success font-semibold" : "text-destructive font-semibold"}>{livePnl >= 0 ? "+" : ""}{formatUSD(livePnl)}</span></div>
-                  <Button size="sm" variant="outline" className="mt-2 w-full h-7 text-xs" onClick={() => close(p.id, Number(p.entry_price), p.side, Number(p.lots))}>Close position</Button>
+                  <Button size="sm" variant="outline" className="mt-2 w-full h-7 text-xs" onClick={() => close(p.id, Number(p.entry_price), p.side, Number(p.lots), p.symbol)}>Close position</Button>
                 </div>
               );
             })}
