@@ -27,7 +27,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/Axio-Funded-MAIN">
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
